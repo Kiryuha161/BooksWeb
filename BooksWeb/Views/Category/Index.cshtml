@@ -1,0 +1,44 @@
+﻿@using BooksWeb.Models.Domain
+
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container py-2">
+    <div class="row pt-3">
+        <div class="col-6">
+            <h2 class="text-primary">Список категорий</h2>
+        </div>
+        <div class="col-6 text-end mb-4">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> &nbsp; Создать новую категорию</a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered tabletable-striped">
+        <thead>
+            <tr>
+                <th style="width:50%">
+                    Название категории
+                </th>
+                <th style="width:20%">
+                    Номер категории
+                </th>
+                <th style="width:30%">
+                    Дата создания категории
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td >@obj.Name</td>
+                    <td >@obj.DisplayOrder</td>
+                    <td >@obj.CreatedDateCategory</td>
+                </tr>
+            }
+        </tbody> 
+    </table>
+</div>
