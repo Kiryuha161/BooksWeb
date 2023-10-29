@@ -44,6 +44,23 @@ namespace BooksWeb.Controllers
             return View(categoryFromDatabase);
         }
 
+        public IActionResult Remove(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var categoryFromDatabase = _database.Categories.Find(id);
+
+            if (categoryFromDatabase == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDatabase);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category obj)
@@ -56,6 +73,8 @@ namespace BooksWeb.Controllers
             {
                 _database.Categories.Add(obj);
                 _database.SaveChanges();
+
+                TempData["SuccessMessage"] = "Создание категории прошло успешно!";
                 return RedirectToAction("Index", "Category");
             }
             return View(obj);
@@ -73,9 +92,30 @@ namespace BooksWeb.Controllers
             {
                 _database.Categories.Update(obj);
                 _database.SaveChanges();
+
+                TempData["SuccessMessage"] = "Редактирование категории прошло успешно!";
                 return RedirectToAction("Index", "Category");
             }
             return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemovePost(int? id)
+        {
+            var obj = _database.Categories.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            
+            _database.Categories.Remove(obj);
+            _database.SaveChanges();
+
+            TempData["SuccessMessage"] = "Удаление категории прошло успешно!";
+            return RedirectToAction("Index", "Category");
+
         }
     }
 }

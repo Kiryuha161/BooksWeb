@@ -2,13 +2,14 @@
 
 @model Category
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Remove";
 }
 
-<form method="post" asp-action="Edit">
+<form method="post" asp-action="RemovePost">
+    <input asp-for="Id" hidden/>
     <div class="border p-3 mt-4 bg-dark">
         <div class="row pb-2">
-            <h2 class="text-primary">Редактировать категорию</h2>
+            <h2 class="text-primary">Удаление категории</h2>
             <hr />
         </div>
 
@@ -16,15 +17,15 @@
 
         <div class="mb-3">
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" />
+            <input asp-for="Name" class="form-control" disabled/>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="DisplayOrder"></label>
-            <input asp-for="DisplayOrder" class="form-control" />
+            <input asp-for="DisplayOrder" class="form-control" disabled />
             <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
-        <input type="submit" value="Обновить категорию" class="btn btn-primary" />
+        <input type="submit" value="Удалить категорию" class="btn btn-danger" />
         <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">Вернуться назад в Список категорий</a>
     </div>
 </form>
